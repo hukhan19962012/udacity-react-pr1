@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import { debounce } from 'throttle-debounce';
 import * as BooksAPI from './BooksAPI';
@@ -11,89 +11,92 @@ const bookStatus = [
   { key: 'wantToRead', name: 'Want to Read' },
   { key: 'read', name: 'Read' }
 ];
-class BooksApp extends Component {
-  state = {
+const BooksApp = () => {
+  const [state, setState] = useState({
     myBooks: [],
     searchBooks: [],
     error: false
-  };
-  componentDidMount = () => {
+  })
+
+  useEffect(() => {
     BooksAPI.getAll()
       .then(books => {
-        this.setState({ myBooks: books });
+        setState({ ...state, myBooks: books });
       })
       .catch(err => {
         console.log(err);
-        this.setState({ error: true });
+        setState({ ...state, error: true });
       });
-  };
+  }, [])
 
-  setStatusBook = (book, shelf) => {
+
+  const setStatusBook = (book, shelf) => {
     BooksAPI.update(book, shelf).catch(err => {
       console.log(err);
-      this.setState({ error: true });
+      setState({ ...state, error: true });
     });
     if (shelf === 'none') {
-      this.setState(prevState => ({
+      setState(prevState => ({
         myBooks: prevState.myBooks.filter(b => b.id !== book.id)
       }));
     } else {
       book.shelf = shelf;
-      this.setState(prevState => ({
+      setState(prevState => ({
         myBooks: prevState.myBooks.filter(b => b.id !== book.id).concat(book)
       }));
     }
   };
-  searchForBooks = debounce(300, false, query => {
+
+  const searchForBooks = debounce(300, false, query => {
     if (query.length > 0) {
       BooksAPI.search(query).then(books => {
         if (books.error) {
-          this.setState({ searchBooks: [] });
+          setState({ ...state, searchBooks: [] });
         } else {
-          this.setState({ searchBooks: books });
+          setState({ ...state, searchBooks: books });
         }
       });
     } else {
-      this.setState({ searchBooks: [] });
+      setState({ ...state, searchBooks: [] });
     }
   });
-  resetSearch = () => {
-    this.setState({ searchBooks: [] });
+  const resetSearch = () => {
+    setState({ ...state, searchBooks: [] });
   };
 
-  render() {
-    const { myBooks, searchBooks, error } = this.state;
-    if (error) {
-      return <div>Network error. Please try again later.</div>;
-    }
-    return (
-      <div className="app">
-        <Route
-          exact
-          path="/"
-          render={() => (
-            <ListBooks
-              bookStatuses={bookStatus}
-              books={myBooks}
-              onMove={this.setStatusBook}
-            />
-          )}
-        />
-        <Route
-          path="/search"
-          render={() => (
-            <SearchBooks
-              searchBooks={searchBooks}
-              myBooks={myBooks}
-              onSearch={this.searchForBooks}
-              onMove={this.setStatusBook}
-              onResetSearch={this.resetSearch}
-            />
-          )}
-        />
-      </div>
-    );
+  const { error, myBooks, searchBooks } = state
+
+  if (error) {
+    return <div>Network error. Please try again later.</div>;
   }
+  return (
+    <div className="app">
+      <Route
+        exact
+        path="/"
+        render={() => (
+          <ListBooks
+            bookStatuses={bookStatus}
+            books={myBooks}
+            onMove={setStatusBook}
+          />
+        )}
+      />
+      <Route
+        path="/search"
+        render={() => (
+          <SearchBooks
+            searchBooks={searchBooks}
+            myBooks={myBooks}
+            onSearch={searchForBooks}
+            onMove={setStatusBook}
+            onResetSearch={resetSearch}
+          />
+        )}
+      />
+    </div>
+  );
 }
+
 
 export default BooksApp;

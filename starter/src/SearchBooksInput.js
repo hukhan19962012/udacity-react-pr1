@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class SearchBooksInput extends Component {
   state = {
@@ -25,4 +26,10 @@ class SearchBooksInput extends Component {
   }
 }
 
+SearchBooksInput.propTypes = {
+  onSearch: PropTypes.func
+};
+
 export default SearchBooksInput;
+
+
