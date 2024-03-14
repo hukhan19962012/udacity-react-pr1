@@ -1,29 +1,29 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-class SearchBooksInput extends Component {
-  state = {
+const SearchBooksInput = (props) =>{
+  const state = {
     value: '',
   };
-  handleChange = event => {
+
+  const handleChange = event => {
     const val = event.target.value;
     this.setState({ value: val }, () => {
-      this.props.onSearch(val);
+      props.onSearch(val);
     });
   };
-  render() {
+
     return (
       <div className="search-books-input-wrapper">
         <input
           type="text"
-          value={this.state.value}
+          value={state.value}
           placeholder="Search by title or author"
-          onChange={this.handleChange}
+          onChange={handleChange}
           autoFocus
         />
       </div>
     );
-  }
 }
 
 SearchBooksInput.propTypes = {

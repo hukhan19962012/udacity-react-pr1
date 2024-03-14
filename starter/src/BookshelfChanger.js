@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 const bookStatus = [
   { key: 'move', name: 'Move to...' },
   { key: 'currentlyReading', name: 'Currently Reading' },
@@ -7,24 +7,24 @@ const bookStatus = [
   { key: 'none', name: 'None' }
 ];
 
-class BookshelfChanger extends Component {
-  state = {
-    value: this.props.shelf
+const BookshelfChanger = (props) => {
+  const state = {
+    value: props.shelf
   };
-  handleChange = event => {
+  const handleChange = event => {
     const { value } = event.target;
     this.setState({ value });
-    this.props.onMove(this.props.book, value);
+    this.props.onMove(props.book, value);
   };
-  render() {
+
     return (
       <div className="book-shelf-changer">
-        <select value={this.state.value} onChange={this.handleChange}>
+        <select value={state.value} onChange={handleChange}>
           {bookStatus.map(({key, name}) => <option value={key}>{name}</option>)}
         </select>
       </div>
     );
-  }
+  
 }
 
 export default BookshelfChanger;
