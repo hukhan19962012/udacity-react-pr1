@@ -18,7 +18,7 @@ export const BookShelfChanger = (props) => {
     return (
       <div className="book-shelf-changer">
         <select value={state.value} onChange={handleChange}>
-          {bookStatus.map(({key, name}) => <option value={key}>{name}</option>)}
+          {bookStatus.map(({key, name}) => <option key={key} value={key}>{name}</option>)}
         </select>
       </div>
     );
