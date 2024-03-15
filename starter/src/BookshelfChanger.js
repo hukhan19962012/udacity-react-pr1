@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 const bookStatus = [
   { key: 'move', name: 'Move to...' },
   { key: 'currentlyReading', name: 'Currently Reading' },
@@ -8,13 +8,11 @@ const bookStatus = [
 ];
 
 const BookshelfChanger = (props) => {
-  const state = {
-    value: props.shelf
-  };
+  const [state, setState] = useState({value: props.shelf})
   const handleChange = event => {
     const { value } = event.target;
-    this.setState({ value });
-    this.props.onMove(props.book, value);
+    setState({ value });
+    props.onMove(props.book, value);
   };
 
     return (

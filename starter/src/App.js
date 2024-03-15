@@ -36,12 +36,12 @@ const BooksApp = () => {
       setState({ ...state, error: true });
     });
     if (shelf === 'none') {
-      setState(prevState => ({
+      setState(prevState => ({...prevState,
         myBooks: prevState.myBooks.filter(b => b.id !== book.id)
       }));
     } else {
       book.shelf = shelf;
-      setState(prevState => ({
+      setState(prevState => ({...prevState,
         myBooks: prevState.myBooks.filter(b => b.id !== book.id).concat(book)
       }));
     }
