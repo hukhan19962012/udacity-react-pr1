@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-const SearchBooksInput = (props) => {
-  const [state, setState] = useState({ value: "" });
+export const SearchInput = (props) => {
+  const [state, setState] = useState("");
 
-  const handleChange = (event) => {
+  const handleSearchChange = (event) => {
     const val = event.target.value;
-    setState({ value: val });
+    setState(val);
     props.onSearch(val);
   };
 
@@ -14,17 +14,16 @@ const SearchBooksInput = (props) => {
     <div className="search-books-input-wrapper">
       <input
         type="text"
-        value={state.value}
-        placeholder="Search by title or author"
-        onChange={handleChange}
+        value={state}
+        placeholder="enter name of book or author"
+        onChange={handleSearchChange}
         autoFocus
       />
     </div>
   );
 };
 
-SearchBooksInput.propTypes = {
+SearchInput.propTypes = {
   onSearch: PropTypes.func,
 };
 
-export default SearchBooksInput;

@@ -7,7 +7,7 @@ const bookStatus = [
   { key: 'none', name: 'None' }
 ];
 
-const BookshelfChanger = (props) => {
+export const BookShelfChanger = (props) => {
   const [state, setState] = useState({value: props.shelf})
   const handleChange = event => {
     const { value } = event.target;
@@ -25,4 +25,4 @@ const BookshelfChanger = (props) => {
   
 }
 
-export default BookshelfChanger;
+

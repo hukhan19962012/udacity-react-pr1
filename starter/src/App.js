@@ -4,7 +4,7 @@ import { debounce } from 'throttle-debounce';
 import * as BooksAPI from './BooksAPI';
 import './App.css';
 import ListBooks from './ListBooks';
-import SearchBooks from './SearchBooks';
+import {SearchBooks} from './SearchBooks';
 
 const bookStatus = [
   { key: 'currentlyReading', name: 'Currently Reading' },
@@ -88,9 +88,9 @@ const BooksApp = () => {
           <SearchBooks
             searchBooks={searchBooks}
             myBooks={myBooks}
-            onSearch={searchForBooks}
+            onSearchBook={searchForBooks}
             onMove={setStatusBook}
-            onResetSearch={resetSearch}
+            onResetSearchFilter={resetSearch}
           />
         )}
       />

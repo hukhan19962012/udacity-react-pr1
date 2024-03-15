@@ -1,14 +1,14 @@
 import React from 'react';
 import SearchResults from './SearchResults';
 import { Link } from 'react-router-dom';
-import SearchBooksInput from './SearchBooksInput';
+import {SearchInput} from './SearchBooksInput';
 
-const SearchBooks = (
+export const SearchBooks = (
   { 
   searchBooks,
   myBooks,
-  onSearch,
-  onResetSearch,
+  onSearchBook,
+  onResetSearchFilter,
   onMove 
   }
   ) => {
@@ -17,11 +17,11 @@ const SearchBooks = (
     <div className="search-books">
       <div className="search-books-bar">
         <Link to="/">
-          <button className="close-search" onClick={onResetSearch}>
-            Close
+          <button className="close-search-button" onClick={onResetSearchFilter}>
+            Close Search
           </button>
         </Link>
-        <SearchBooksInput onSearch={onSearch} />
+        <SearchInput onSearch={onSearchBook} />
       </div>
       <SearchResults
         searchBooks={searchBooks}
@@ -32,4 +32,3 @@ const SearchBooks = (
   );
 }
 
-export default SearchBooks;

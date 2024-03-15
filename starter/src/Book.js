@@ -1,7 +1,7 @@
 import React from 'react';
-import BookshelfChanger from './BookshelfChanger';
+import {BookShelfChanger} from './BookshelfChanger';
 
-const Book = ({ book, shelf, onMove }) => (
+export const Book = ({ book, shelf, onMove }) => (
   <li>
     <div className="book">
       <div className="book-top">
@@ -17,7 +17,7 @@ const Book = ({ book, shelf, onMove }) => (
             })`
           }}
         />
-        <BookshelfChanger book={book} shelf={shelf} onMove={onMove} />
+        <BookShelfChanger book={book} shelf={shelf} onMove={onMove} />
       </div>
       <div className="book-title">{book.title}</div>
       <div className="book-authors">
@@ -27,4 +27,3 @@ const Book = ({ book, shelf, onMove }) => (
   </li>
 );
 
-export default Book;

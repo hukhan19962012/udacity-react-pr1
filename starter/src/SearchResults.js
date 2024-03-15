@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import Book from './Book';
+import {Book} from './Book';
 
 const SearchResults = (props) => {
   const { searchBooks, myBooks, onMove } = props;
   const [updatedBooks, setUpdateBooks] = useState([])
 
   useEffect(() => {
-    const state = searchBooks.map(book => {
+    const state = searchBooks.map(x => {
       myBooks.map(b => {
-        if (b.id === book.id) {
-          book.shelf = b.shelf;
+        if (b.id === x.id) {
+          b.shelf = x.shelf;
         }
         return b;
       });
-      return book;
+      return x;
     });
 
     setUpdateBooks(state)
@@ -21,12 +21,12 @@ const SearchResults = (props) => {
  
   return (
     <div className="search-books-results">
-      <ol className="books-grid">
-        {updatedBooks.map(book => (
+      <ol className="books-grid-view">
+        {updatedBooks.map(x=> (
           <Book
-            key={book.id}
-            book={book}
-            shelf={book.shelf ? book.shelf : 'none'}
+            key={x.id}
+            book={x}
+            shelf={x.shelf ? x.shelf : 'none'}
             onMove={onMove}
           />
         ))}

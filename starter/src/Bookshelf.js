@@ -1,17 +1,16 @@
 import React from 'react';
-import Book from './Book';
+import {Book} from './Book';
 
-const Bookshelf = props => {
+export const Bookshelf = (props) => {
   const { shelf, books, onMove } = props;
-  const booksOnThisShelf = books.filter(book => book.shelf === shelf.key);
-  // console.log('booksOnThisShelf', booksOnThisShelf);
+  const onSelfBooks = books.filter(book => book.shelf === shelf.key);
   return (
-    <div className="bookshelf">
-      <h2 className="bookshelf-title">{shelf.name}</h2>
-      <div className="bookshelf-books">
+    <div className="book-shelf">
+      <h2 className="book-shelf-title">{shelf.name}</h2>
+      <div className="book-shelf-books">
         <ol className="books-grid">
-          {booksOnThisShelf.map(book => (
-            <Book key={book.id} book={book} shelf={shelf.key} onMove={onMove} />
+          {onSelfBooks.map(x => (
+            <Book key={x.id} book={x} shelf={shelf.key} onMove={onMove} />
           ))}
         </ol>
       </div>
@@ -19,4 +18,3 @@ const Bookshelf = props => {
   );
 };
 
-export default Bookshelf;

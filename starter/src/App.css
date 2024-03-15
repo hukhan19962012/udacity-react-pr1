@@ -35,21 +35,21 @@ body, .app {
   flex: 1;
 }
 
-.bookshelf {
+.book-shelf {
   padding: 0 10px 20px;
 }
 
 @media (min-width: 600px) {
-  .bookshelf {
+  .book-shelf {
     padding: 0 20px 40px;
   }
 }
 
-.bookshelf-title {
+.book-shelf-title {
   border-bottom: 1px solid #dedede;
 }
 
-.bookshelf-books {
+.book-shelf-books {
   text-align: center;
 }
 
@@ -104,7 +104,7 @@ body, .app {
   outline: none;
 }
 
-.close-search {
+.close-search-button {
   display: block;
   top: 20px;
   left: 15px;
@@ -130,7 +130,7 @@ button:active {
 
 /* books grid */
 
-.books-grid {
+.books-grid-view {
   list-style-type: none;
   padding: 0;
   margin: 0;
@@ -139,7 +139,7 @@ button:active {
   flex-wrap: wrap;
 }
 
-.books-grid li {
+.books-grid-view li {
   padding: 10px 15px;
   text-align: left;
 }
