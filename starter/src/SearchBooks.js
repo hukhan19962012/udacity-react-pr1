@@ -1,7 +1,7 @@
 import React from 'react';
 import SearchResults from './SearchResults';
 import { Link } from 'react-router-dom';
-import {SearchInput} from './SearchBooksInput';
+import {SearchField} from './SearchBooksInput';
 
 export const SearchBooks = (
   { 
@@ -14,14 +14,13 @@ export const SearchBooks = (
   ) => {
 
   return (
-    <div className="search-books">
-      <div className="search-books-bar">
+    <div className="books-search">
+      <div className="books-search-bar">
         <Link to="/">
           <button className="close-search-button" onClick={onResetSearchFilter}>
-            Close Search
           </button>
         </Link>
-        <SearchInput onSearch={onSearchBook} />
+        <SearchField onSearch={onSearchBook} />
       </div>
       <SearchResults
         searchBooks={searchBooks}

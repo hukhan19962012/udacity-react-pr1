@@ -20,7 +20,7 @@ const SearchResults = (props) => {
   }, [searchBooks, myBooks, onMove])
  
   return (
-    <div className="search-books-results">
+    <div className="books-search-results">
       <ol className="books-grid-view">
         {updatedBooks.map(x=> (
           <Book

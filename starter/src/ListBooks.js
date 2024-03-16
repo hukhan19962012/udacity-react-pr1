@@ -1,22 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Bookshelf } from './Bookshelf';
+import { BookShelf } from './Bookshelf';
 
 
 const ListBooks = (props) => {
 
   const { bookStatuses, books, onMove } = props;
   return (
-    <div className="list-books">
-      <div className="list-books-title">
+    <div className="books-collection">
+      <div className="books-collection-title">
         <h1>My Reads</h1>
       </div>
-      <div className="list-books-content">
+      <div className="books-collection-content">
         <div>
-          {bookStatuses.map(shelf => (
-            <Bookshelf
-              key={shelf.key}
-              shelf={shelf}
+          {bookStatuses.map(x => (
+            <BookShelf
+              key={x.key}
+              shelf={x}
               books={books}
               onMove={onMove}
             />

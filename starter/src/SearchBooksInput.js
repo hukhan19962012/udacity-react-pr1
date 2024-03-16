@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-export const SearchInput = (props) => {
+export const SearchField = (props) => {
   const [state, setState] = useState("");
 
   const handleSearchChange = (event) => {
@@ -11,7 +11,7 @@ export const SearchInput = (props) => {
   };
 
   return (
-    <div className="search-books-input-wrapper">
+    <div className="books-search-input-wrapper">
       <input
         type="text"
         value={state}
@@ -23,7 +23,7 @@ export const SearchInput = (props) => {
   );
 };
 
-SearchInput.propTypes = {
+SearchField.propTypes = {
   onSearch: PropTypes.func,
 };
 

@@ -6,10 +6,8 @@ export const Book = ({ book, shelf, onMove }) => (
     <div className="book">
       <div className="book-top">
         <div
-          className="book-cover"
+          className="book-container"
           style={{
-            width: 128,
-            height: 193,
             backgroundImage: `url(${
               book.imageLinks
                 ? book.imageLinks.thumbnail
@@ -19,8 +17,8 @@ export const Book = ({ book, shelf, onMove }) => (
         />
         <BookShelfChanger book={book} shelf={shelf} onMove={onMove} />
       </div>
-      <div className="book-title">{book.title}</div>
-      <div className="book-authors">
+      <div className="book-container-title">{book.title}</div>
+      <div className="book-container-authors">
         {book.authors ? book.authors.join(', ') : 'Unknown Author'}
       </div>
     </div>
