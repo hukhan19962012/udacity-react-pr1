@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import "./App.css";
-import * as BooksAPI from './BooksAPI';
 import { Route } from 'react-router-dom';
-import { ListBook } from './ListBooks';
 import { debounce } from 'throttle-debounce';
-import { SearchBooks } from './SearchBooks';
+import * as BooksAPI from './BooksAPI';
+import './App.css';
+import ListBooks from './ListBooks';
+import {SearchBooks} from './SearchBooks';
 
-
-export const App = () => {
-
+const bookStatus = [
+  { key: 'currentlyReading', name: 'Currently Reading' },
+  { key: 'wantToRead', name: 'Want to Read' },
+  { key: 'read', name: 'Read' }
+];
+const BooksApp = () => {
   const [state, setState] = useState({
     myBooks: [],
     searchBooks: [],
@@ -33,14 +36,12 @@ export const App = () => {
       setState({ ...state, error: true });
     });
     if (shelf === 'none') {
-      setState(prevState => ({
-        ...prevState,
+      setState(prevState => ({...prevState,
         myBooks: prevState.myBooks.filter(b => b.id !== book.id)
       }));
     } else {
       book.shelf = shelf;
-      setState(prevState => ({
-        ...prevState,
+      setState(prevState => ({...prevState,
         myBooks: prevState.myBooks.filter(b => b.id !== book.id).concat(book)
       }));
     }
@@ -74,22 +75,28 @@ export const App = () => {
         exact
         path="/"
         render={() => (
-          <ListBook books={myBooks} move={setStatusBook} />
-        )} />
+          <ListBooks
+            bookStatuses={bookStatus}
+            books={myBooks}
+            onMove={setStatusBook}
+          />
+        )}
+      />
       <Route
-        path="/searchBook"
+        path="/search"
         render={() => (
           <SearchBooks
-            listBooks={searchBooks}
-            books={myBooks}
-            searchBook={searchForBooks}
-            move={setStatusBook}
-            resetSearchFilter={resetSearch}
+            searchBooks={searchBooks}
+            myBooks={myBooks}
+            onSearchBook={searchForBooks}
+            onMove={setStatusBook}
+            onResetSearchFilter={resetSearch}
           />
         )}
       />
     </div>
-  )
+  );
 }
 
 
+export default BooksApp;
