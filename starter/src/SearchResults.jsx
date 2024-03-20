@@ -8,7 +8,7 @@ const SearchResults = ( { searchBooks, myBooks, move } ) => {
     const state = searchBooks.map(x => {
       myBooks.map(b => {
         if (b.id === x.id) {
-          b.shelf = x.shelf;
+          x.shelf = b.shelf;
         }
         return b;
       });
@@ -21,6 +21,7 @@ const SearchResults = ( { searchBooks, myBooks, move } ) => {
   return (
     <div className="search-books-container-results">
       <ol className="book-container-grid-view">
+        {console.log(updatedBooks, myBooks)}
         {updatedBooks.map(x=> (
           <Book
             key={x.id}
